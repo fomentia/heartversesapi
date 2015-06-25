@@ -1,4 +1,4 @@
-# Heartversesapi
+# HeartVerses API
 
 To start your new Phoenix application:
 
