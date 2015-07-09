@@ -8,8 +8,9 @@ defmodule Heartversesapi.V1.KJVController do
 
   def index(conn, %{"book" => book, "chapter" => chapter, "verse" => verse}) do
     verses = Repo.all(from v in KJV,
-                      where: v.number == ^verse,
-                      where: v.chapter == ^chapter)
+                      where: v.book == ^book,
+                      where: v.chapter == ^chapter,
+                      where: v.number == ^verse)
     render(conn, "index.json", verses: verses)
   end
 
