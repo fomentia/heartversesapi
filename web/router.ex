@@ -12,11 +12,11 @@ defmodule Heartversesapi.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", Heartversesapi do
+  scope "/api", Heartversesapi do
     pipe_through :api
 
     scope "/v1", V1, as: :v1 do
-      resources "/kjv", KJVController
+      resources "/kjv/:book/:chapter/:verse", KJVController#, :fetch
     end
   end
 end

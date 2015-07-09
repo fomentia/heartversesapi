@@ -6,8 +6,10 @@ defmodule Heartversesapi.V1.KJVController do
   plug :scrub_params, "kjv" when action in [:create, :update]
   plug :action
 
-  def index(conn, _params) do
-    verses = Repo.all(KJV)
+  def index(conn, %{"book" => book, "chapter" => chapter, "verse" => verse}) do
+    verses = Repo.all(from v in KJV,
+                      where: v.number == ^verse,
+                      where: v.chapter == ^chapter)
     render(conn, "index.json", verses: verses)
   end
 
@@ -47,6 +49,12 @@ defmodule Heartversesapi.V1.KJVController do
     kjv = Repo.get(KJV, id)
 
     kjv = Repo.delete!(kjv)
+    render(conn, "show.json", kjv: kjv)
+  end
+
+  def fetch(conn, %{"book" => book, "chapter" => chapter, "verse" => verse}) do
+    kjv = Repo.all(from v in KJV,
+                   where: v.number == ^verse)
     render(conn, "show.json", kjv: kjv)
   end
 end
