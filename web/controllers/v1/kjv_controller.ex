@@ -14,6 +14,12 @@ defmodule Heartversesapi.V1.KJVController do
     render(conn, "index.json", verses: verses)
   end
 
+  def index(conn, %{"book" => book, "chapter" => chapter, "verse_start" => verse_start, "verse_end" => verse_end}) do
+    verses = Repo.all(from v in KJV, where: v.book == ^book, where: v.chapter == ^chapter, where: v.number >= ^verse_start, where: v.number <= ^verse_end)
+
+    render(conn, "index.json", verses: verses)
+  end
+
   def create(conn, %{"kjv" => kjv_params}) do
     changeset = KJV.changeset(%KJV{}, kjv_params)
 
