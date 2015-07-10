@@ -9,7 +9,5 @@ config :heartversesapi, Heartversesapi.Endpoint,
 # Configure your database
 config :heartversesapi, Heartversesapi.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
-  database: "heartversesapi_prod",
+  url: System.get_env("DATABASE_URL")
   size: 20 # The amount of database connections in the pool
