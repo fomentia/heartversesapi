@@ -14,6 +14,7 @@ use Mix.Config
 config :heartversesapi, Heartversesapi.Endpoint,
   http: [port: {:system, "PORT"}],
   url: [host: "example.com"],
+  cache_static_manifest: "priv/static/manifest.json"
 
 # ## SSL Support
 #
