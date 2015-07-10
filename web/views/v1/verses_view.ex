@@ -2,8 +2,14 @@ defmodule Heartversesapi.V1.VersesView do
   use Heartversesapi.Web, :view
 
   def render("index.json", %{verses: verses}) do
-    verses
-    # %{data: render_many(verses, Heartversesapi.V1.KJVView, "kjv.json")}
+    %{ translation: "KJV", verses: Enum.map(verses, fn(verse) ->
+      %{
+        book: verse.book,
+        chapter: verse.chapter,
+        verse: verse.verse,
+        text: verse.text
+      }
+    end)}
   end
 
   def render("show.json", %{kjv: kjv}) do
