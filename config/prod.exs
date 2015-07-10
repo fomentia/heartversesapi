@@ -13,7 +13,7 @@ use Mix.Config
 # which you typically run after static files are built.
 config :heartversesapi, Heartversesapi.Endpoint,
   http: [port: {:system, "PORT"}],
-  url: [host: "example.com"],
+  url: [host: "heartversesapi.herokuapp.com"],
   cache_static_manifest: "priv/static/manifest.json"
 
 # ## SSL Support
