@@ -1,25 +1,25 @@
-defmodule Heartversesapi.V1.KJVController do
+defmodule Heartversesapi.V1.VersesController do
   use Heartversesapi.Web, :controller
 
-  alias Heartversesapi.KJV
+  alias Heartversesapi.Verses
 
-  plug :scrub_params, "kjv" when action in [:create, :update]
+  plug :scrub_params, "verses" when action in [:create, :update]
   plug :action
 
   def index(conn, %{"book" => book, "chapter" => chapter, "verse" => verse}) do
-    verses = Repo.all(from v in KJV,
+    verses = Repo.all(from v in Verses,
                       where: v.book == ^book,
                       where: v.chapter == ^chapter,
-                      where: v.number == ^verse)
+                      where: v.verse == ^verse)
     render(conn, "index.json", verses: verses)
   end
 
   def index(conn, %{"book" => book, "chapter" => chapter, "verse_start" => verse_start, "verse_end" => verse_end}) do
-    verses = Repo.all(from v in KJV,
+    verses = Repo.all(from v in Verses,
                       where: v.book == ^book,
                       where: v.chapter == ^chapter,
-                      where: v.number >= ^verse_start,
-                      where: v.number <= ^verse_end)
+                      where: v.verse >= ^verse_start,
+                      where: v.verse <= ^verse_end)
 
     render(conn, "index.json", verses: verses)
   end
@@ -65,7 +65,7 @@ defmodule Heartversesapi.V1.KJVController do
   #
   # def fetch(conn, %{"book" => book, "chapter" => chapter, "verse" => verse}) do
   #   kjv = Repo.all(from v in KJV,
-  #                  where: v.number == ^verse)
+  #                  where: v.verse == ^verse)
   #   render(conn, "show.json", kjv: kjv)
   # end
 end

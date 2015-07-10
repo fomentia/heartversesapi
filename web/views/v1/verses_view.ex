@@ -1,4 +1,4 @@
-defmodule Heartversesapi.V1.KJVView do
+defmodule Heartversesapi.V1.VersesView do
   use Heartversesapi.Web, :view
 
   def render("index.json", %{verses: verses}) do
@@ -7,7 +7,7 @@ defmodule Heartversesapi.V1.KJVView do
   end
 
   def render("show.json", %{kjv: kjv}) do
-    %{data: render_one(kjv, Heartversesapi.V1.KJVView, "kjv.json")}
+    %{data: render_one(kjv, Heartversesapi.V1.VersesView, "kjv.json")}
   end
 
   def render("kjv.json", %{kjv: kjv}) do

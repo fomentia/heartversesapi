@@ -1,8 +1,8 @@
-defmodule Heartversesapi.V1.KJVControllerTest do
+defmodule Heartversesapi.V1.VersesControllerTest do
   use Heartversesapi.ConnCase
 
-  alias Heartversesapi.KJV
-  @valid_attrs %{book: "some content", chapter: 42, number: 42, text: "some content"}
+  alias Heartversesapi.Verses
+  @valid_attrs %{book: "some content", chapter: 42, verse: 42, text: "some content"}
   @invalid_attrs %{}
 
   setup do
@@ -16,7 +16,7 @@ defmodule Heartversesapi.V1.KJVControllerTest do
   end
 
   test "shows chosen resource", %{conn: conn} do
-    kjv = Repo.insert! %KJV{}
+    kjv = Repo.insert! %Verses{}
     conn = get conn, v1_kjv_path(conn, :show, kjv)
     assert json_response(conn, 200)["data"] == %{
       "id" => kjv.id
@@ -26,7 +26,7 @@ defmodule Heartversesapi.V1.KJVControllerTest do
   test "creates and renders resource when data is valid", %{conn: conn} do
     conn = post conn, v1_kjv_path(conn, :create), kjv: @valid_attrs
     assert json_response(conn, 200)["data"]["id"]
-    assert Repo.get_by(KJV, @valid_attrs)
+    assert Repo.get_by(Verses, @valid_attrs)
   end
 
   test "does not create resource and renders errors when data is invalid", %{conn: conn} do
@@ -35,22 +35,22 @@ defmodule Heartversesapi.V1.KJVControllerTest do
   end
 
   test "updates and renders chosen resource when data is valid", %{conn: conn} do
-    kjv = Repo.insert! %KJV{}
+    kjv = Repo.insert! %Verses{}
     conn = put conn, v1_kjv_path(conn, :update, kjv), kjv: @valid_attrs
     assert json_response(conn, 200)["data"]["id"]
-    assert Repo.get_by(KJV, @valid_attrs)
+    assert Repo.get_by(Verses, @valid_attrs)
   end
 
   test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
-    kjv = Repo.insert! %KJV{}
+    kjv = Repo.insert! %Verses{}
     conn = put conn, v1_kjv_path(conn, :update, kjv), kjv: @invalid_attrs
     assert json_response(conn, 422)["errors"] != %{}
   end
 
   test "deletes chosen resource", %{conn: conn} do
-    kjv = Repo.insert! %KJV{}
+    kjv = Repo.insert! %Verses{}
     conn = delete conn, v1_kjv_path(conn, :delete, kjv)
     assert json_response(conn, 200)["data"]["id"]
-    refute Repo.get(KJV, kjv.id)
+    refute Repo.get(Verses, kjv.id)
   end
 end

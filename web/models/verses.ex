@@ -1,16 +1,17 @@
-defmodule Heartversesapi.KJV do
+defmodule Heartversesapi.Verses do
   use Heartversesapi.Web, :model
 
   schema "verses" do
+    field :translation, :string
     field :book, :string
     field :chapter, :integer
-    field :number, :integer
+    field :verse, :integer
     field :text, :string
 
     timestamps
   end
 
-  @required_fields ~w(book chapter number text)
+  @required_fields ~w(translation book chapter verse text)
   @optional_fields ~w()
 
   @doc """

@@ -16,8 +16,8 @@ defmodule Heartversesapi.Router do
     pipe_through :api
 
     scope "/v1", V1, as: :v1 do
-      resources "/kjv/:book/:chapter/:verse", KJVController, only: [:index]
-      resources "/kjv/range/:book/:chapter/:verse_start/:verse_end", KJVController, only: [:index]
+      resources "/kjv/:book/:chapter/:verse", VersesController, only: [:index]
+      resources "/kjv/range/:book/:chapter/:verse_start/:verse_end", VersesController, only: [:index]
     end
   end
 end
