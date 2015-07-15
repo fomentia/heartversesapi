@@ -8,7 +8,7 @@ defmodule Heartversesapi.V1.VersesController do
 
   def index(conn, %{"book" => book, "chapter" => chapter, "verse" => verse}) do
     verses = Repo.all(from v in Verses,
-                      where: v.book == ^book,
+                      where: fragment("LOWER(?) = LOWER(?)", v.book, ^book),
                       where: v.chapter == ^chapter,
                       where: v.verse == ^verse)
     render(conn, "index.json", verses: verses)
