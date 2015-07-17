@@ -16,7 +16,7 @@ defmodule Heartversesapi.V1.VersesController do
 
   def index(conn, %{"book" => book, "chapter" => chapter, "verse_start" => verse_start, "verse_end" => verse_end}) do
     verses = Repo.all(from v in Verses,
-                      where: v.book == ^book,
+                      where: fragment("LOWER(?) = LOWER(?)", v.book, ^book),
                       where: v.chapter == ^chapter,
                       where: v.verse >= ^verse_start,
                       where: v.verse <= ^verse_end)
