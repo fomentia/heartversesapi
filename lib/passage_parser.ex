@@ -1,6 +1,22 @@
 defmodule PassageParser do
   def parse(passage) do
-    [_, book, chapter, _, verse] = Regex.run(~r/(\w{2,})\s*(\d{1,3})(:(\d{1,3}))?/i, passage)
-    [book: book, chapter: String.to_integer(chapter), verse_start: String.to_integer(verse)]
+    match = Regex.run(~r/(\w{2,})\s*(\d{1,3})(:(\d{1,3}))?(-(\d{1,3}))?/i, passage)
+
+    cond do
+      match?([_, book, chapter, _, verse_start, _, verse_end], match) ->
+        [_, book, chapter, _, verse_start, _, verse_end] = match
+        [book: book, chapter: String.to_integer(chapter), verse_start: String.to_integer(verse_start), verse_end: String.to_integer(verse_end)]
+
+      match?([_, book, chapter, _, verse], match) ->
+        [_, book, chapter, _, verse] = match
+        [book: book, chapter: String.to_integer(chapter), verse_start: String.to_integer(verse)]
+
+      match?([_, book, chapter], match) ->
+        [_, book, chapter] = match
+        [book: book, chapter: String.to_integer(chapter)]
+
+      true ->
+        "Invalid passage"
+    end
   end
 end
