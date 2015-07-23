@@ -1,5 +1,6 @@
 defmodule PassageParser do
   def parse(passage) do
-    [book: "John", chapter: 3, verse_start: 16]
+    [_, book, chapter, _, verse] = Regex.run(~r/(\w{2,})\s*(\d{1,3})(:(\d{1,3}))?/i, passage)
+    [book: book, chapter: String.to_integer(chapter), verse_start: String.to_integer(verse)]
   end
 end
