@@ -1,6 +1,6 @@
 defmodule PassageParser do
   def parse(passage) do
-    match = Regex.run(~r/(\w{2,})\s*(\d{1,3})(:(\d{1,3}))?(-(\d{1,3}))?/i, passage)
+    match = Regex.run(~r/([A-Za-z]{2,})\s*(\d{1,3})(:(\d{1,3}))?(-(\d{1,3}))?/i, passage)
 
     cond do
       match?([_, book, chapter, _, verse_start, _, verse_end], match) ->
