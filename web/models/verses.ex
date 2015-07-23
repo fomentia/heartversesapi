@@ -24,8 +24,6 @@ defmodule Heartversesapi.Verses do
     model
     |> cast(params, @required_fields, @optional_fields)
     |> validate_length(:book, max: 18)
-    |> validate_length(:translation, max: 5)
-    |> validate_length(:chapter, max: 3)
-    |> validate_length(:verse, max: 3)
+    |> validate_length(:translation, max: 4)
   end
 end

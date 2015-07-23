@@ -3,8 +3,8 @@ defmodule Heartversesapi.VersesTest do
 
   alias Heartversesapi.Verses
 
-  @valid_attrs %{book: "some content", chapter: 42, verse: 42, text: "some content"}
-  @invalid_attrs %{}
+  @valid_attrs %{translation: "KJV", book: "Genesis", chapter: 1, verse: 1, text: "In the beginning God created the heaven and the earth."}
+  @invalid_attrs %{translation: "badd stuff", book: "candyland", chapter: 8888888, verse: -1, text: "wuzzup"}
 
   test "changeset with valid attributes" do
     changeset = Verses.changeset(%Verses{}, @valid_attrs)
