@@ -18,7 +18,7 @@ defmodule Heartversesapi.Router do
     scope "/v1", V1, as: :v1 do
       resources "/kjv/:book/:chapter/:verse", VersesController, only: [:index]
       resources "/kjv/range/:book/:chapter/:verse_start/:verse_end", VersesController, only: [:index]
-      resources "/parse", ParseController, only: [:index]
+      resources "/parse/:passage", ParseController, only: [:index]
     end
   end
 end
