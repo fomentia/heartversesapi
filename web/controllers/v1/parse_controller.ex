@@ -17,7 +17,8 @@ defmodule Heartversesapi.V1.ParseController do
         full_passage = Repo.all(from v in Verses,
                                 where: fragment("LOWER(?) LIKE LOWER(?)", v.book, ^query_string),
                                 where: v.chapter == ^chapter,
-                                where: v.verse == ^verse_start)
+                                where: v.verse >= ^verse_start,
+                                where: v.verse <= ^verse_end)
 
       match?(%{book: book, chapter: chapter, verse_start: verse_start}, parsed_passage) ->
         %{book: book, chapter: chapter, verse_start: verse_start} = parsed_passage
@@ -30,7 +31,8 @@ defmodule Heartversesapi.V1.ParseController do
         %{book: book, chapter: chapter} = parsed_passage
         full_passage = Repo.all(from v in Verses,
                                 where: fragment("LOWER(?) LIKE LOWER(?)", v.book, ^query_string),
-                                where: v.chapter == ^chapter)
+                                where: v.chapter == ^chapter,
+                                where: v.verse == 1)
 
       parsed_passage == "Invalid passage" ->
         full_passage = parsed_passage
